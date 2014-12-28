@@ -6,19 +6,29 @@
  */
 package org.sidoh.reactor_simulator.thrift;
 
-import java.util.BitSet;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.thrift.EncodingUtils;
-import org.apache.thrift.protocol.TTupleProtocol;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
+
 import org.apache.thrift.scheme.TupleScheme;
+import org.apache.thrift.protocol.TTupleProtocol;
+import org.apache.thrift.protocol.TProtocolException;
+import org.apache.thrift.EncodingUtils;
+import org.apache.thrift.TException;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.EnumSet;
+import java.util.Collections;
+import java.util.BitSet;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, ReactorResult._Fields>, java.io.Serializable, Cloneable {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ReactorResult");
@@ -29,7 +39,7 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
   private static final org.apache.thrift.protocol.TField COOLANT_TEMPERATURE_FIELD_DESC = new org.apache.thrift.protocol.TField("coolantTemperature", org.apache.thrift.protocol.TType.DOUBLE, (short)4);
   private static final org.apache.thrift.protocol.TField FUEL_HEAT_FIELD_DESC = new org.apache.thrift.protocol.TField("fuelHeat", org.apache.thrift.protocol.TType.DOUBLE, (short)5);
   private static final org.apache.thrift.protocol.TField REACTOR_HEAT_FIELD_DESC = new org.apache.thrift.protocol.TField("reactorHeat", org.apache.thrift.protocol.TType.DOUBLE, (short)6);
-  private static final org.apache.thrift.protocol.TField REACTOR_LAYOUT_FIELD_DESC = new org.apache.thrift.protocol.TField("reactorLayout", org.apache.thrift.protocol.TType.STRING, (short)7);
+  private static final org.apache.thrift.protocol.TField REACTOR_DEFINITION_FIELD_DESC = new org.apache.thrift.protocol.TField("reactorDefinition", org.apache.thrift.protocol.TType.STRUCT, (short)7);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -43,7 +53,7 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
   public double coolantTemperature; // required
   public double fuelHeat; // required
   public double reactorHeat; // required
-  public String reactorLayout; // required
+  public ReactorDefinition reactorDefinition; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -53,7 +63,7 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
     COOLANT_TEMPERATURE((short)4, "coolantTemperature"),
     FUEL_HEAT((short)5, "fuelHeat"),
     REACTOR_HEAT((short)6, "reactorHeat"),
-    REACTOR_LAYOUT((short)7, "reactorLayout");
+    REACTOR_DEFINITION((short)7, "reactorDefinition");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -80,8 +90,8 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
           return FUEL_HEAT;
         case 6: // REACTOR_HEAT
           return REACTOR_HEAT;
-        case 7: // REACTOR_LAYOUT
-          return REACTOR_LAYOUT;
+        case 7: // REACTOR_DEFINITION
+          return REACTOR_DEFINITION;
         default:
           return null;
       }
@@ -144,8 +154,8 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     tmpMap.put(_Fields.REACTOR_HEAT, new org.apache.thrift.meta_data.FieldMetaData("reactorHeat", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
-    tmpMap.put(_Fields.REACTOR_LAYOUT, new org.apache.thrift.meta_data.FieldMetaData("reactorLayout", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.REACTOR_DEFINITION, new org.apache.thrift.meta_data.FieldMetaData("reactorDefinition", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ReactorDefinition.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ReactorResult.class, metaDataMap);
   }
@@ -160,7 +170,7 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
     double coolantTemperature,
     double fuelHeat,
     double reactorHeat,
-    String reactorLayout)
+    ReactorDefinition reactorDefinition)
   {
     this();
     this.efficiency = efficiency;
@@ -175,7 +185,7 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
     setFuelHeatIsSet(true);
     this.reactorHeat = reactorHeat;
     setReactorHeatIsSet(true);
-    this.reactorLayout = reactorLayout;
+    this.reactorDefinition = reactorDefinition;
   }
 
   /**
@@ -189,8 +199,8 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
     this.coolantTemperature = other.coolantTemperature;
     this.fuelHeat = other.fuelHeat;
     this.reactorHeat = other.reactorHeat;
-    if (other.isSetReactorLayout()) {
-      this.reactorLayout = other.reactorLayout;
+    if (other.isSetReactorDefinition()) {
+      this.reactorDefinition = new ReactorDefinition(other.reactorDefinition);
     }
   }
 
@@ -212,7 +222,7 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
     this.fuelHeat = 0.0;
     setReactorHeatIsSet(false);
     this.reactorHeat = 0.0;
-    this.reactorLayout = null;
+    this.reactorDefinition = null;
   }
 
   public double getEfficiency() {
@@ -353,27 +363,27 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __REACTORHEAT_ISSET_ID, value);
   }
 
-  public String getReactorLayout() {
-    return this.reactorLayout;
+  public ReactorDefinition getReactorDefinition() {
+    return this.reactorDefinition;
   }
 
-  public ReactorResult setReactorLayout(String reactorLayout) {
-    this.reactorLayout = reactorLayout;
+  public ReactorResult setReactorDefinition(ReactorDefinition reactorDefinition) {
+    this.reactorDefinition = reactorDefinition;
     return this;
   }
 
-  public void unsetReactorLayout() {
-    this.reactorLayout = null;
+  public void unsetReactorDefinition() {
+    this.reactorDefinition = null;
   }
 
-  /** Returns true if field reactorLayout is set (has been assigned a value) and false otherwise */
-  public boolean isSetReactorLayout() {
-    return this.reactorLayout != null;
+  /** Returns true if field reactorDefinition is set (has been assigned a value) and false otherwise */
+  public boolean isSetReactorDefinition() {
+    return this.reactorDefinition != null;
   }
 
-  public void setReactorLayoutIsSet(boolean value) {
+  public void setReactorDefinitionIsSet(boolean value) {
     if (!value) {
-      this.reactorLayout = null;
+      this.reactorDefinition = null;
     }
   }
 
@@ -427,11 +437,11 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
       }
       break;
 
-    case REACTOR_LAYOUT:
+    case REACTOR_DEFINITION:
       if (value == null) {
-        unsetReactorLayout();
+        unsetReactorDefinition();
       } else {
-        setReactorLayout((String)value);
+        setReactorDefinition((ReactorDefinition)value);
       }
       break;
 
@@ -458,8 +468,8 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
     case REACTOR_HEAT:
       return Double.valueOf(getReactorHeat());
 
-    case REACTOR_LAYOUT:
-      return getReactorLayout();
+    case REACTOR_DEFINITION:
+      return getReactorDefinition();
 
     }
     throw new IllegalStateException();
@@ -484,8 +494,8 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
       return isSetFuelHeat();
     case REACTOR_HEAT:
       return isSetReactorHeat();
-    case REACTOR_LAYOUT:
-      return isSetReactorLayout();
+    case REACTOR_DEFINITION:
+      return isSetReactorDefinition();
     }
     throw new IllegalStateException();
   }
@@ -557,12 +567,12 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
         return false;
     }
 
-    boolean this_present_reactorLayout = true && this.isSetReactorLayout();
-    boolean that_present_reactorLayout = true && that.isSetReactorLayout();
-    if (this_present_reactorLayout || that_present_reactorLayout) {
-      if (!(this_present_reactorLayout && that_present_reactorLayout))
+    boolean this_present_reactorDefinition = true && this.isSetReactorDefinition();
+    boolean that_present_reactorDefinition = true && that.isSetReactorDefinition();
+    if (this_present_reactorDefinition || that_present_reactorDefinition) {
+      if (!(this_present_reactorDefinition && that_present_reactorDefinition))
         return false;
-      if (!this.reactorLayout.equals(that.reactorLayout))
+      if (!this.reactorDefinition.equals(that.reactorDefinition))
         return false;
     }
 
@@ -642,12 +652,12 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetReactorLayout()).compareTo(typedOther.isSetReactorLayout());
+    lastComparison = Boolean.valueOf(isSetReactorDefinition()).compareTo(typedOther.isSetReactorDefinition());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetReactorLayout()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.reactorLayout, typedOther.reactorLayout);
+    if (isSetReactorDefinition()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.reactorDefinition, typedOther.reactorDefinition);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -696,11 +706,11 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
     sb.append(this.reactorHeat);
     first = false;
     if (!first) sb.append(", ");
-    sb.append("reactorLayout:");
-    if (this.reactorLayout == null) {
+    sb.append("reactorDefinition:");
+    if (this.reactorDefinition == null) {
       sb.append("null");
     } else {
-      sb.append(this.reactorLayout);
+      sb.append(this.reactorDefinition);
     }
     first = false;
     sb.append(")");
@@ -710,6 +720,9 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
+    if (reactorDefinition != null) {
+      reactorDefinition.validate();
+    }
   }
 
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -796,10 +809,11 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 7: // REACTOR_LAYOUT
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.reactorLayout = iprot.readString();
-              struct.setReactorLayoutIsSet(true);
+          case 7: // REACTOR_DEFINITION
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.reactorDefinition = new ReactorDefinition();
+              struct.reactorDefinition.read(iprot);
+              struct.setReactorDefinitionIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -837,9 +851,9 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
       oprot.writeFieldBegin(REACTOR_HEAT_FIELD_DESC);
       oprot.writeDouble(struct.reactorHeat);
       oprot.writeFieldEnd();
-      if (struct.reactorLayout != null) {
-        oprot.writeFieldBegin(REACTOR_LAYOUT_FIELD_DESC);
-        oprot.writeString(struct.reactorLayout);
+      if (struct.reactorDefinition != null) {
+        oprot.writeFieldBegin(REACTOR_DEFINITION_FIELD_DESC);
+        struct.reactorDefinition.write(oprot);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -878,7 +892,7 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
       if (struct.isSetReactorHeat()) {
         optionals.set(5);
       }
-      if (struct.isSetReactorLayout()) {
+      if (struct.isSetReactorDefinition()) {
         optionals.set(6);
       }
       oprot.writeBitSet(optionals, 7);
@@ -900,8 +914,8 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
       if (struct.isSetReactorHeat()) {
         oprot.writeDouble(struct.reactorHeat);
       }
-      if (struct.isSetReactorLayout()) {
-        oprot.writeString(struct.reactorLayout);
+      if (struct.isSetReactorDefinition()) {
+        struct.reactorDefinition.write(oprot);
       }
     }
 
@@ -934,8 +948,9 @@ public class ReactorResult implements org.apache.thrift.TBase<ReactorResult, Rea
         struct.setReactorHeatIsSet(true);
       }
       if (incoming.get(6)) {
-        struct.reactorLayout = iprot.readString();
-        struct.setReactorLayoutIsSet(true);
+        struct.reactorDefinition = new ReactorDefinition();
+        struct.reactorDefinition.read(iprot);
+        struct.setReactorDefinitionIsSet(true);
       }
     }
   }

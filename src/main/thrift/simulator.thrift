@@ -1,4 +1,4 @@
-namespace java org.sidoh.reactor_simulator.types
+namespace java org.sidoh.reactor_simulator.thrift
 
 struct ReactorResult {
   1: double efficiency;

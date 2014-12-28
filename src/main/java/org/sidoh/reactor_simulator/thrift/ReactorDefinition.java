@@ -37,7 +37,7 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
   private static final org.apache.thrift.protocol.TField Z_SIZE_FIELD_DESC = new org.apache.thrift.protocol.TField("zSize", org.apache.thrift.protocol.TType.I32, (short)2);
   private static final org.apache.thrift.protocol.TField HEIGHT_FIELD_DESC = new org.apache.thrift.protocol.TField("height", org.apache.thrift.protocol.TType.I32, (short)3);
   private static final org.apache.thrift.protocol.TField LAYOUT_FIELD_DESC = new org.apache.thrift.protocol.TField("layout", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField IS_PASSIVELY_COOLED_FIELD_DESC = new org.apache.thrift.protocol.TField("isPassivelyCooled", org.apache.thrift.protocol.TType.BOOL, (short)5);
+  private static final org.apache.thrift.protocol.TField IS_ACTIVELY_COOLED_FIELD_DESC = new org.apache.thrift.protocol.TField("isActivelyCooled", org.apache.thrift.protocol.TType.BOOL, (short)5);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -49,7 +49,7 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
   public int zSize; // required
   public int height; // required
   public String layout; // required
-  public boolean isPassivelyCooled; // required
+  public boolean isActivelyCooled; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -57,7 +57,7 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
     Z_SIZE((short)2, "zSize"),
     HEIGHT((short)3, "height"),
     LAYOUT((short)4, "layout"),
-    IS_PASSIVELY_COOLED((short)5, "isPassivelyCooled");
+    IS_ACTIVELY_COOLED((short)5, "isActivelyCooled");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -80,8 +80,8 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
           return HEIGHT;
         case 4: // LAYOUT
           return LAYOUT;
-        case 5: // IS_PASSIVELY_COOLED
-          return IS_PASSIVELY_COOLED;
+        case 5: // IS_ACTIVELY_COOLED
+          return IS_ACTIVELY_COOLED;
         default:
           return null;
       }
@@ -125,7 +125,7 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
   private static final int __XSIZE_ISSET_ID = 0;
   private static final int __ZSIZE_ISSET_ID = 1;
   private static final int __HEIGHT_ISSET_ID = 2;
-  private static final int __ISPASSIVELYCOOLED_ISSET_ID = 3;
+  private static final int __ISACTIVELYCOOLED_ISSET_ID = 3;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -138,7 +138,7 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.LAYOUT, new org.apache.thrift.meta_data.FieldMetaData("layout", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.IS_PASSIVELY_COOLED, new org.apache.thrift.meta_data.FieldMetaData("isPassivelyCooled", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.IS_ACTIVELY_COOLED, new org.apache.thrift.meta_data.FieldMetaData("isActivelyCooled", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ReactorDefinition.class, metaDataMap);
@@ -152,7 +152,7 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
     int zSize,
     int height,
     String layout,
-    boolean isPassivelyCooled)
+    boolean isActivelyCooled)
   {
     this();
     this.xSize = xSize;
@@ -162,8 +162,8 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
     this.height = height;
     setHeightIsSet(true);
     this.layout = layout;
-    this.isPassivelyCooled = isPassivelyCooled;
-    setIsPassivelyCooledIsSet(true);
+    this.isActivelyCooled = isActivelyCooled;
+    setIsActivelyCooledIsSet(true);
   }
 
   /**
@@ -177,7 +177,7 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
     if (other.isSetLayout()) {
       this.layout = other.layout;
     }
-    this.isPassivelyCooled = other.isPassivelyCooled;
+    this.isActivelyCooled = other.isActivelyCooled;
   }
 
   public ReactorDefinition deepCopy() {
@@ -193,8 +193,8 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
     setHeightIsSet(false);
     this.height = 0;
     this.layout = null;
-    setIsPassivelyCooledIsSet(false);
-    this.isPassivelyCooled = false;
+    setIsActivelyCooledIsSet(false);
+    this.isActivelyCooled = false;
   }
 
   public int getXSize() {
@@ -290,27 +290,27 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
     }
   }
 
-  public boolean isIsPassivelyCooled() {
-    return this.isPassivelyCooled;
+  public boolean isIsActivelyCooled() {
+    return this.isActivelyCooled;
   }
 
-  public ReactorDefinition setIsPassivelyCooled(boolean isPassivelyCooled) {
-    this.isPassivelyCooled = isPassivelyCooled;
-    setIsPassivelyCooledIsSet(true);
+  public ReactorDefinition setIsActivelyCooled(boolean isActivelyCooled) {
+    this.isActivelyCooled = isActivelyCooled;
+    setIsActivelyCooledIsSet(true);
     return this;
   }
 
-  public void unsetIsPassivelyCooled() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ISPASSIVELYCOOLED_ISSET_ID);
+  public void unsetIsActivelyCooled() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ISACTIVELYCOOLED_ISSET_ID);
   }
 
-  /** Returns true if field isPassivelyCooled is set (has been assigned a value) and false otherwise */
-  public boolean isSetIsPassivelyCooled() {
-    return EncodingUtils.testBit(__isset_bitfield, __ISPASSIVELYCOOLED_ISSET_ID);
+  /** Returns true if field isActivelyCooled is set (has been assigned a value) and false otherwise */
+  public boolean isSetIsActivelyCooled() {
+    return EncodingUtils.testBit(__isset_bitfield, __ISACTIVELYCOOLED_ISSET_ID);
   }
 
-  public void setIsPassivelyCooledIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ISPASSIVELYCOOLED_ISSET_ID, value);
+  public void setIsActivelyCooledIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ISACTIVELYCOOLED_ISSET_ID, value);
   }
 
   public void setFieldValue(_Fields field, Object value) {
@@ -347,11 +347,11 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
       }
       break;
 
-    case IS_PASSIVELY_COOLED:
+    case IS_ACTIVELY_COOLED:
       if (value == null) {
-        unsetIsPassivelyCooled();
+        unsetIsActivelyCooled();
       } else {
-        setIsPassivelyCooled((Boolean)value);
+        setIsActivelyCooled((Boolean)value);
       }
       break;
 
@@ -372,8 +372,8 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
     case LAYOUT:
       return getLayout();
 
-    case IS_PASSIVELY_COOLED:
-      return Boolean.valueOf(isIsPassivelyCooled());
+    case IS_ACTIVELY_COOLED:
+      return Boolean.valueOf(isIsActivelyCooled());
 
     }
     throw new IllegalStateException();
@@ -394,8 +394,8 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
       return isSetHeight();
     case LAYOUT:
       return isSetLayout();
-    case IS_PASSIVELY_COOLED:
-      return isSetIsPassivelyCooled();
+    case IS_ACTIVELY_COOLED:
+      return isSetIsActivelyCooled();
     }
     throw new IllegalStateException();
   }
@@ -449,12 +449,12 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
         return false;
     }
 
-    boolean this_present_isPassivelyCooled = true;
-    boolean that_present_isPassivelyCooled = true;
-    if (this_present_isPassivelyCooled || that_present_isPassivelyCooled) {
-      if (!(this_present_isPassivelyCooled && that_present_isPassivelyCooled))
+    boolean this_present_isActivelyCooled = true;
+    boolean that_present_isActivelyCooled = true;
+    if (this_present_isActivelyCooled || that_present_isActivelyCooled) {
+      if (!(this_present_isActivelyCooled && that_present_isActivelyCooled))
         return false;
-      if (this.isPassivelyCooled != that.isPassivelyCooled)
+      if (this.isActivelyCooled != that.isActivelyCooled)
         return false;
     }
 
@@ -514,12 +514,12 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetIsPassivelyCooled()).compareTo(typedOther.isSetIsPassivelyCooled());
+    lastComparison = Boolean.valueOf(isSetIsActivelyCooled()).compareTo(typedOther.isSetIsActivelyCooled());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetIsPassivelyCooled()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.isPassivelyCooled, typedOther.isPassivelyCooled);
+    if (isSetIsActivelyCooled()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.isActivelyCooled, typedOther.isActivelyCooled);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -564,8 +564,8 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("isPassivelyCooled:");
-    sb.append(this.isPassivelyCooled);
+    sb.append("isActivelyCooled:");
+    sb.append(this.isActivelyCooled);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -644,10 +644,10 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 5: // IS_PASSIVELY_COOLED
+          case 5: // IS_ACTIVELY_COOLED
             if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
-              struct.isPassivelyCooled = iprot.readBool();
-              struct.setIsPassivelyCooledIsSet(true);
+              struct.isActivelyCooled = iprot.readBool();
+              struct.setIsActivelyCooledIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -681,8 +681,8 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
         oprot.writeString(struct.layout);
         oprot.writeFieldEnd();
       }
-      oprot.writeFieldBegin(IS_PASSIVELY_COOLED_FIELD_DESC);
-      oprot.writeBool(struct.isPassivelyCooled);
+      oprot.writeFieldBegin(IS_ACTIVELY_COOLED_FIELD_DESC);
+      oprot.writeBool(struct.isActivelyCooled);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -714,7 +714,7 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
       if (struct.isSetLayout()) {
         optionals.set(3);
       }
-      if (struct.isSetIsPassivelyCooled()) {
+      if (struct.isSetIsActivelyCooled()) {
         optionals.set(4);
       }
       oprot.writeBitSet(optionals, 5);
@@ -730,8 +730,8 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
       if (struct.isSetLayout()) {
         oprot.writeString(struct.layout);
       }
-      if (struct.isSetIsPassivelyCooled()) {
-        oprot.writeBool(struct.isPassivelyCooled);
+      if (struct.isSetIsActivelyCooled()) {
+        oprot.writeBool(struct.isActivelyCooled);
       }
     }
 
@@ -756,8 +756,8 @@ public class ReactorDefinition implements org.apache.thrift.TBase<ReactorDefinit
         struct.setLayoutIsSet(true);
       }
       if (incoming.get(4)) {
-        struct.isPassivelyCooled = iprot.readBool();
-        struct.setIsPassivelyCooledIsSet(true);
+        struct.isActivelyCooled = iprot.readBool();
+        struct.setIsActivelyCooledIsSet(true);
       }
     }
   }

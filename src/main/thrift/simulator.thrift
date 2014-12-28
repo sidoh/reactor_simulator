@@ -5,7 +5,7 @@ struct ReactorDefinition {
   2: i32 zSize;
   3: i32 height;
   4: string layout;
-  5: bool isPassivelyCooled;
+  5: bool isActivelyCooled;
 }
 
 struct ReactorResult {

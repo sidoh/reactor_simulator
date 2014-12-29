@@ -2,3 +2,8 @@ target/
 lib/
 *.iml
 *.sw*
+/.gradle
+/build
+/run
+
+/out

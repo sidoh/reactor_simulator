@@ -12,7 +12,10 @@ public class SimulatorServiceHandler implements SimulatorService.Iface {
 
   @Override
   public ReactorResult simulateReactor(ReactorDefinition definition) throws TException {
-    BigReactorSimulator simulator = new BigReactorSimulator(definition.isIsActivelyCooled(), MAX_NUMBER_OF_TICKS);
+    BigReactorSimulator simulator = new BigReactorSimulator(
+        definition.isIsActivelyCooled(),
+        MAX_NUMBER_OF_TICKS
+    );
     FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(
         definition.getLayout(),
         definition.getXSize(),

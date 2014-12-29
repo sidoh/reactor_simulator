@@ -3,6 +3,7 @@ package org.sidoh.reactor_simulator.service;
 import org.apache.thrift.server.THsHaServer;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TTransportException;
+import org.sidoh.reactor_simulator.simulator.BigReactorSimulator;
 import org.sidoh.reactor_simulator.thrift.SimulatorService;
 import org.sidoh.reactor_simulator.thrift.SimulatorService.Processor;
 
@@ -19,6 +20,12 @@ public class SimulatorServer {
   }
 
   public void start() {
+    BigReactorSimulator.init();
     server.serve();
+  }
+
+  public static void main(String[] args) throws TTransportException {
+    SimulatorServer server = new SimulatorServer(DEFAULT_PORT);
+    server.start();
   }
 }

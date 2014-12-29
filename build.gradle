@@ -16,6 +16,7 @@ buildscript {
 }
 
 apply plugin: 'forge'
+apply plugin: 'application'
 
 sourceSets.main.java.srcDirs += 'SimulatorServer/src/main/java'
 
@@ -24,6 +25,8 @@ version = ant.properties['vMajor'] + "." + ant.properties['vMinor'] + "." + ant.
 
 group = "sidoh" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "ReactorSimulator"
+
+mainClassName = 'org.sidoh.reactor_simulator.service.SimulatorServer'
 
 minecraft {
     version = "1.7.10-10.13.0.1205"

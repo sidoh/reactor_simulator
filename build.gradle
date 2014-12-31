@@ -58,6 +58,10 @@ dependencies {
     compile 'org.apache.thrift:libthrift:0.9.0'
     compile 'org.slf4j:slf4j-api:1.7.9'
     compile 'org.slf4j:slf4j-simple:1.7.9'
+    compile 'io.restx:restx-core:0.33.1'
+    compile 'io.restx:restx-core-annotation-processor:0.33.1'
+    compile 'io.restx:restx-server-jetty:0.33.1'
+    compile 'io.restx:restx-factory:0.33.1'
 
     // Remember to use the non-obfuscated dev versions!
 	compile files('lib/CoFHCore-[1.7.10]3.0.0B6-dev-32.jar');		// CoFHCore - general libraries

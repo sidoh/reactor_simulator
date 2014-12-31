@@ -199,39 +199,6 @@ public class BigReactorSimulator {
     }
   }
 
-  public static class ReactorResult {
-    public final double efficiency;
-    public final double output;
-    public final int numRods;
-    public final float fuelFertility;
-    public final float coolantTemperature;
-    public final float fuelHeat;
-    public final float reactorHeat;
-
-    public ReactorResult(double efficiency, double output, int numRods, float fuelFertility, float coolantTemperature, float fuelHeat, float reactorHeat) {
-      this.efficiency = efficiency;
-      this.output = output;
-      this.numRods = numRods;
-      this.fuelFertility = fuelFertility;
-      this.coolantTemperature = coolantTemperature;
-      this.fuelHeat = fuelHeat;
-      this.reactorHeat = reactorHeat;
-    }
-
-    @Override
-    public String toString() {
-      return "ReactorResult{" +
-          "efficiency=" + efficiency +
-          ", output=" + output +
-          ", numRods=" + numRods +
-          ", fuelFertility=" + fuelFertility +
-          ", coolantTemperature=" + coolantTemperature +
-          ", fuelHeat=" + fuelHeat +
-          ", reactorHeat=" + reactorHeat +
-          '}';
-    }
-  }
-
   public static void main(String[] args) {
     System.out.println("Started");
     BigReactorSimulator.init();

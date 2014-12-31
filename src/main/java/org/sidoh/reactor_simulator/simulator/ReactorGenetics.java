@@ -34,11 +34,11 @@ public class ReactorGenetics {
 
     @Override
     protected double evaluate(IChromosome chromosome) {
-      BigReactorSimulator.ReactorResult result = getResult(chromosome);
+      ReactorResult result = getResult(chromosome);
       return result.efficiency;
     }
 
-    public BigReactorSimulator.ReactorResult getResult(IChromosome chromosome) {
+    public ReactorResult getResult(IChromosome chromosome) {
       String s = makeReactorString(chromosome);
       FakeReactorWorld reactor = reactorFactory.create(s);
       return simulator.simulate(reactor);
@@ -129,12 +129,12 @@ public class ReactorGenetics {
     }
 
     public void run() {
-      BigReactorSimulator.ReactorResult result = function.simulate(reactor);
+      ReactorResult result = function.simulate(reactor);
       genome.fitness = evaluator.eval(result);
       genome.result = result;
     }
 
-    public static double calcFitness(BigReactorSimulator.ReactorResult result, ReactorGenome genome) {
+    public static double calcFitness(ReactorResult result, ReactorGenome genome) {
       return (result.efficiency + (result.output * (1 / 8.0)));
     }
 
@@ -224,35 +224,35 @@ public class ReactorGenetics {
     Map<String, Evaluator> evaluatorMap = Maps.newHashMap();
     evaluatorMap.put("eff", new Evaluator() {
       @Override
-      public double eval(BigReactorSimulator.ReactorResult result) {
+      public double eval(ReactorResult result) {
         return result.efficiency;
       }
     });
 
     evaluatorMap.put("out", new Evaluator() {
       @Override
-      public double eval(BigReactorSimulator.ReactorResult result) {
+      public double eval(ReactorResult result) {
         return result.output + (Math.pow(result.efficiency, 1/4.0));
       }
     });
 
     evaluatorMap.put("outPerRod", new Evaluator() {
       @Override
-      public double eval(BigReactorSimulator.ReactorResult result) {
+      public double eval(ReactorResult result) {
         return result.output/result.numRods;
       }
     });
 
     evaluatorMap.put("both", new Evaluator() {
       @Override
-      public double eval(BigReactorSimulator.ReactorResult result) {
+      public double eval(ReactorResult result) {
         return result.output*result.efficiency;
       }
     });
 
     evaluatorMap.put("nim", new Evaluator() {
       @Override
-      public double eval(BigReactorSimulator.ReactorResult result) {
+      public double eval(ReactorResult result) {
         return result.output > 20000 ? result.efficiency : result.output/100;
       }
     });
@@ -324,7 +324,7 @@ public class ReactorGenetics {
   }
 
   private static interface Evaluator{
-    public double eval(BigReactorSimulator.ReactorResult result);
+    public double eval(ReactorResult result);
   }
 
   public void display(String s) {
@@ -343,7 +343,7 @@ public class ReactorGenetics {
 
     private String reactor;
     private double fitness;
-    private BigReactorSimulator.ReactorResult result;
+    private ReactorResult result;
     private static Random random = new Random();
 
     private ReactorGenome(String reactor) {

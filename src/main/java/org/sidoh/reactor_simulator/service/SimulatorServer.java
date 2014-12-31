@@ -1,31 +1,22 @@
 package org.sidoh.reactor_simulator.service;
 
-import org.apache.thrift.server.THsHaServer;
-import org.apache.thrift.transport.TNonblockingServerSocket;
-import org.apache.thrift.transport.TTransportException;
-import org.sidoh.reactor_simulator.simulator.BigReactorSimulator;
-import org.sidoh.reactor_simulator.thrift.SimulatorService;
-import org.sidoh.reactor_simulator.thrift.SimulatorService.Processor;
+import com.google.common.base.Optional;
+import erogenousbeef.bigreactors.simulator.BigReactorSimulator;
+import restx.server.JettyWebServer;
+import restx.server.WebServer;
 
 public class SimulatorServer {
-  public static final int DEFAULT_PORT = 3141;
+  public static final String WEB_INF_LOCATION = "src/main/webapp/WEB-INF/web.xml";
+  public static final String WEB_APP_LOCATION = "src/main/webapp";
 
-  private final TNonblockingServerSocket transport;
-  private final THsHaServer server;
+  public static void main(String[] args) throws Exception {
+    int port = Integer.valueOf(Optional.fromNullable(System.getenv("PORT")).or("8080"));
+    WebServer server = new JettyWebServer(WEB_INF_LOCATION, WEB_APP_LOCATION, port, "0.0.0.0");
 
-  public SimulatorServer(int port) throws TTransportException {
-    transport = new TNonblockingServerSocket(port);
-    final Processor<SimulatorService.Iface> processor = new Processor<SimulatorService.Iface>(new SimulatorServiceHandler());
-    server = new THsHaServer(new THsHaServer.Args(transport).processor(processor));
-  }
+    System.setProperty("restx.mode", "prod");
+    System.setProperty("restx.app.package", "hello");
 
-  public void start() {
     BigReactorSimulator.init();
-    server.serve();
-  }
-
-  public static void main(String[] args) throws TTransportException {
-    SimulatorServer server = new SimulatorServer(DEFAULT_PORT);
-    server.start();
+    server.startAndAwait();
   }
 }

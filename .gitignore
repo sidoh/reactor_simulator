@@ -1,5 +1,7 @@
 target/
 lib/
+logs/
+*.log
 *.iml
 *.sw*
 /.gradle

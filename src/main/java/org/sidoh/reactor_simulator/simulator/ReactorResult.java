@@ -5,17 +5,15 @@ import java.io.Serializable;
 public class ReactorResult implements Serializable {
   public double efficiency;
   public double output;
-  public int numRods;
   public float fuelFertility;
   public float coolantTemperature;
   public float fuelHeat;
   public float reactorHeat;
   public ReactorDefinition reactorDefinition;
 
-  public ReactorResult(double efficiency, double output, int numRods, float fuelFertility, float coolantTemperature, float fuelHeat, float reactorHeat) {
+  public ReactorResult(double efficiency, double output, float fuelFertility, float coolantTemperature, float fuelHeat, float reactorHeat) {
     this.efficiency = efficiency;
     this.output = output;
-    this.numRods = numRods;
     this.fuelFertility = fuelFertility;
     this.coolantTemperature = coolantTemperature;
     this.fuelHeat = fuelHeat;
@@ -37,11 +35,6 @@ public class ReactorResult implements Serializable {
 
   public ReactorResult setOutput(double output) {
     this.output = output;
-    return this;
-  }
-
-  public ReactorResult setNumRods(int numRods) {
-    this.numRods = numRods;
     return this;
   }
 
@@ -70,7 +63,6 @@ public class ReactorResult implements Serializable {
     return "ReactorResult{" +
         "efficiency=" + efficiency +
         ", output=" + output +
-        ", numRods=" + numRods +
         ", fuelFertility=" + fuelFertility +
         ", coolantTemperature=" + coolantTemperature +
         ", fuelHeat=" + fuelHeat +

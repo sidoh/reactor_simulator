@@ -1,7 +1,7 @@
 package org.sidoh.reactor_simulator.service;
 
 import com.google.common.base.Optional;
-import erogenousbeef.bigreactors.simulator.BigReactorSimulator;
+import org.sidoh.reactor_simulator.simulator.BigReactorSimulator;
 import restx.server.JettyWebServer;
 import restx.server.WebServer;
 

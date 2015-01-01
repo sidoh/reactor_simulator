@@ -41,15 +41,22 @@ repositories {
         name "CoFHCore"
         artifactPattern "http://addons.cursecdn.com/files/2221/835/[module]-[revision].[ext]"
     }
-    flatDir {
-        dirs 'lib'
-    }
 }
 
 dependencies {
     compile 'com.mod-buildcraft:buildcraft:6.0.18:dev'
     compile 'li.cil.oc:OpenComputers:MC1.7.10-1.4.0.+:api'
     compile name: 'CoFHCore', version: '[1.7.10]3.0.0B9-40-dev', ext: 'jar'
+
+    // :'(
+    compile fileTree(dir: 'lib', include: ['*.jar'])
+
+    compile 'org.slf4j:slf4j-api:1.7.9'
+    compile 'org.slf4j:slf4j-simple:1.7.9'
+    compile 'io.restx:restx-core:0.33.1'
+    compile 'io.restx:restx-core-annotation-processor:0.33.1'
+    compile 'io.restx:restx-server-jetty:0.33.1'
+    compile 'io.restx:restx-factory:0.33.1'
 }
 
 processResources

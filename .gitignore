@@ -1,5 +1,4 @@
 target/
-lib/
 logs/
 *.log
 *.iml

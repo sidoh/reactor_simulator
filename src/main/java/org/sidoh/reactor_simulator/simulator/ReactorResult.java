@@ -3,7 +3,7 @@ package org.sidoh.reactor_simulator.simulator;
 import java.io.Serializable;
 
 public class ReactorResult implements Serializable {
-  public double efficiency;
+  private double fuelConsuption;
   public double output;
   public float fuelFertility;
   public float coolantTemperature;
@@ -11,8 +11,8 @@ public class ReactorResult implements Serializable {
   public float reactorHeat;
   public ReactorDefinition reactorDefinition;
 
-  public ReactorResult(double efficiency, double output, float fuelFertility, float coolantTemperature, float fuelHeat, float reactorHeat) {
-    this.efficiency = efficiency;
+  public ReactorResult(double fuelConsuption, double output, float fuelFertility, float coolantTemperature, float fuelHeat, float reactorHeat) {
+    this.fuelConsuption = fuelConsuption;
     this.output = output;
     this.fuelFertility = fuelFertility;
     this.coolantTemperature = coolantTemperature;
@@ -23,13 +23,13 @@ public class ReactorResult implements Serializable {
   public ReactorResult() {
   }
 
-  public ReactorResult setReactorDefinition(ReactorDefinition reactorDefinition) {
-    this.reactorDefinition = reactorDefinition;
+  public ReactorResult setFuelConsuption(double fuelConsuption) {
+    this.fuelConsuption = fuelConsuption;
     return this;
   }
 
-  public ReactorResult setEfficiency(double efficiency) {
-    this.efficiency = efficiency;
+  public ReactorResult setReactorDefinition(ReactorDefinition reactorDefinition) {
+    this.reactorDefinition = reactorDefinition;
     return this;
   }
 
@@ -61,12 +61,13 @@ public class ReactorResult implements Serializable {
   @Override
   public String toString() {
     return "ReactorResult{" +
-        "efficiency=" + efficiency +
+        "fuelConsuption=" + fuelConsuption +
         ", output=" + output +
         ", fuelFertility=" + fuelFertility +
         ", coolantTemperature=" + coolantTemperature +
         ", fuelHeat=" + fuelHeat +
         ", reactorHeat=" + reactorHeat +
+        ", reactorDefinition=" + reactorDefinition +
         '}';
   }
 }

@@ -138,9 +138,8 @@ public class BigReactorSimulator {
     }
 
     return new ReactorResult(
-        simulator.getEnergyGeneratedLastTick() / simulator.getFuelConsumedLastTick(),
+        simulator.getFuelConsumedLastTick(),
         simulator.getEnergyGeneratedLastTick(),
-        world.getNumRods(),
         simulator.getFuelFertility(),
         simulator.getCoolantTemperature(),
         simulator.getFuelHeat(),

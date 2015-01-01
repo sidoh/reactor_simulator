@@ -3,7 +3,7 @@ package org.sidoh.reactor_simulator.simulator;
 import java.io.Serializable;
 
 public class ReactorResult implements Serializable {
-  private double fuelConsuption;
+  public double fuelConsuption;
   public double output;
   public float fuelFertility;
   public float coolantTemperature;

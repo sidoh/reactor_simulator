@@ -35,7 +35,7 @@ public class SimulatorResource {
 
     return new ReactorResult()
         .setCoolantTemperature(rawResult.coolantTemperature)
-        .setEfficiency(rawResult.efficiency)
+        .setFuelConsuption(rawResult.fuelConsuption)
         .setFuelFertility(rawResult.fuelFertility)
         .setFuelHeat(rawResult.fuelHeat)
         .setOutput(rawResult.output)

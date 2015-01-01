@@ -16,9 +16,12 @@ buildscript {
 }
 
 apply plugin: 'forge'
+apply plugin: 'application'
 
 group = "org.sidoh" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "reactor_simulator"
+
+mainClassName = 'org.sidoh.reactor_simulator.service.SimulatorServer'
 
 minecraft {
     version = "1.7.10-10.13.2.1232"

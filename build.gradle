@@ -62,6 +62,7 @@ dependencies {
     compile 'io.restx:restx-core-annotation-processor:0.33.1'
     compile 'io.restx:restx-server-jetty:0.33.1'
     compile 'io.restx:restx-factory:0.33.1'
+    compile 'erogenousbeef:BigReactors'
 
     // Remember to use the non-obfuscated dev versions!
 	compile files('lib/CoFHCore-[1.7.10]3.0.0B6-dev-32.jar');		// CoFHCore - general libraries

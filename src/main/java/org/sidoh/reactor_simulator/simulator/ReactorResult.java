@@ -3,7 +3,7 @@ package org.sidoh.reactor_simulator.simulator;
 import java.io.Serializable;
 
 public class ReactorResult implements Serializable {
-  public double fuelConsuption;
+  public double fuelConsumption;
   public double output;
   public float fuelFertility;
   public float coolantTemperature;
@@ -11,8 +11,8 @@ public class ReactorResult implements Serializable {
   public float reactorHeat;
   public ReactorDefinition reactorDefinition;
 
-  public ReactorResult(double fuelConsuption, double output, float fuelFertility, float coolantTemperature, float fuelHeat, float reactorHeat) {
-    this.fuelConsuption = fuelConsuption;
+  public ReactorResult(double fuelConsumption, double output, float fuelFertility, float coolantTemperature, float fuelHeat, float reactorHeat) {
+    this.fuelConsumption = fuelConsumption;
     this.output = output;
     this.fuelFertility = fuelFertility;
     this.coolantTemperature = coolantTemperature;
@@ -23,8 +23,8 @@ public class ReactorResult implements Serializable {
   public ReactorResult() {
   }
 
-  public ReactorResult setFuelConsuption(double fuelConsuption) {
-    this.fuelConsuption = fuelConsuption;
+  public ReactorResult setFuelConsumption(double fuelConsumption) {
+    this.fuelConsumption = fuelConsumption;
     return this;
   }
 
@@ -61,7 +61,7 @@ public class ReactorResult implements Serializable {
   @Override
   public String toString() {
     return "ReactorResult{" +
-        "fuelConsuption=" + fuelConsuption +
+        "fuelConsumption=" + fuelConsumption +
         ", output=" + output +
         ", fuelFertility=" + fuelFertility +
         ", coolantTemperature=" + coolantTemperature +

@@ -45,9 +45,13 @@ public class SimulatorResource {
   }
 
   private static void validateReactorDefinition(ReactorDefinition reactorDefinition) {
-    checkArgument(reactorDefinition.getxSize() >= 5, "xSize should be at least 5");
-    checkArgument(reactorDefinition.getzSize() >= 5, "zSize should be at least 5");
+    checkArgument(reactorDefinition.getxSize() >= 3, "xSize should be at least 3");
+    checkArgument(reactorDefinition.getzSize() >= 3, "zSize should be at least 3");
     checkArgument(reactorDefinition.getHeight() >= 3, "zSize should be at least 3");
+
+    checkArgument(reactorDefinition.getxSize() <= 32, "xSize should be no larger than 32");
+    checkArgument(reactorDefinition.getzSize() <= 32, "zSize should be no larger than 32");
+    checkArgument(reactorDefinition.getHeight() <= 48, "height should be no larger than 48");
 
     final int layoutSize = (reactorDefinition.getxSize() - 2) * (reactorDefinition.getzSize() - 2);
     checkArgument(

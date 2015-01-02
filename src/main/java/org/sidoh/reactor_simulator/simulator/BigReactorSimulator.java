@@ -143,8 +143,6 @@ public class BigReactorSimulator {
         numNegativeDeltas++;
       }
 
-      System.out.println("Tick " + i + " value = " + energyValue);
-
       if (numNegativeDeltas >= STABILITY_THRESHOLD) {
         break;
       }

@@ -123,10 +123,10 @@ public class BigReactorSimulator {
     for (int i = 0; i < this.ticks; i++) {
       simulator.updateServer();
 
-      final double energyValue = simulator.getEnergyGeneratedLastTick();
-      final double energyDelta  = (energyValue - lastValue);
+      final double heatValue = simulator.getFuelHeat();
+      final double heatDelta = (heatValue - lastValue);
 
-      if (energyDelta < 0) {
+      if (heatDelta < 0) {
         numNegativeDeltas++;
       }
 
@@ -134,7 +134,7 @@ public class BigReactorSimulator {
         break;
       }
 
-      lastValue = energyValue;
+      lastValue = heatValue;
     }
 
     return new ReactorResult(

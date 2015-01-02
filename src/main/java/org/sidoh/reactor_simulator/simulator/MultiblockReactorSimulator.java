@@ -39,6 +39,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidBlock;
 
@@ -156,6 +158,8 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
     }
     fuelContainer.setCapacity(Integer.MAX_VALUE);
     fuelContainer.addFuel(fuel, Integer.MAX_VALUE, true); //fill to the brim, next call will clamp to actual size
+    coolantContainer.setCapacity(Integer.MAX_VALUE);
+    coolantContainer.addCoolant(new FluidStack(FluidRegistry.WATER.getID(), Integer.MAX_VALUE));
     recalculateDerivedValues();
     ;
   }
@@ -625,6 +629,8 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
     reactorHeatLossCoefficient = reactorHeatLossConductivity * surfaceArea;
 
     calculateReactorVolume();
+
+    coolantContainer.setCapacity(Integer.MAX_VALUE);
 
 //    if (attachedCoolantPorts.size() > 0) {
 //      int outerVolume = StaticUtils.ExtraMath.Volume(minCoord, maxCoord) - reactorVolume;

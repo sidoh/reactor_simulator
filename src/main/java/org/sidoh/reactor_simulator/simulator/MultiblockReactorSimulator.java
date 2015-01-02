@@ -106,7 +106,7 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
   private static final int ticksBetweenUpdates = 3;
   private static final int maxEnergyStored = 10000000;
 
-  public MultiblockReactorSimulator(IFakeReactorWorld world, String fuel, boolean activelyCooled) {
+  public MultiblockReactorSimulator(IFakeReactorWorld world, String fuel, String coolant, boolean activelyCooled) {
 
     // Game stuff
     active = false;
@@ -257,8 +257,6 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
     if (Float.isNaN(this.getReactorHeat())) {
       this.setReactorHeat(0.0f);
     }
-
-    System.out.println(getDebugInfo());
 
     float oldHeat = this.getReactorHeat();
     float oldEnergy = this.getEnergyStored();

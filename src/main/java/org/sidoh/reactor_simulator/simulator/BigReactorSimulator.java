@@ -22,7 +22,7 @@ public class BigReactorSimulator {
           "E X X X X X X E" +
           "E E X E E X E E" +
           "E E E E E E E E";
-  private static final double STABILITY_THRESHOLD = 150;
+  private static final double STABILITY_THRESHOLD = 1500;
   private int ticks;
 
   public BigReactorSimulator(boolean activelyCooled, int ticks) {
@@ -199,28 +199,12 @@ public class BigReactorSimulator {
   }
 
   public static void main(String[] args) {
-    System.out.println("Started");
     BigReactorSimulator.init();
-    String reactor =
-            "C C C C C C C C C C C C C" +
-            "C C C C C C C C C C C C C" +
-            "C C C C C C C C C C C C C" +
-            "C C C C C C C C C C C C C" +
-            "C C C C C C C C C C C C C" +
-            "C C C C C X G X C C C C C" +
-            "C C C C C G C G C C C C C" +
-            "C C C C C X G X C C C C C" +
-            "C C C C C C C C C C C C C" +
-            "C C C C C C C C C C C C C" +
-            "C C C C C C C C C C C C C" +
-            "C C C C C C C C C C C C C" +
-            "C C C C C C C C C C C C C";
+    String reactor = "CCCCCCXCXCCCXCCCXCXCCCCCC";
 
-
-    FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 15, 15, 10);
+    FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 7, 7, 3);
 
     ReactorResult simulate = new BigReactorSimulator(false, 10000).simulate(fakeReactorWorld);
     System.out.println(simulate);
   }
-
 }

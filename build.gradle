@@ -18,6 +18,9 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'application'
 
+ant.loadproperties(srcFile: "version.properties")
+version = ant.properties['vMajor'] + "." + ant.properties['vMinor'] + "." + ant.properties['vPatch'] + ant.properties['vSuffix']
+
 group = "org.sidoh" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "reactor_simulator"
 

@@ -14,7 +14,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Component
 @RestxResource
 public class SimulatorResource {
-  private static final int MAX_NUMBER_OF_TICKS = 10000;
+  private static final int MAX_NUMBER_OF_TICKS = 100000;
 
   @PermitAll
   @GET("/simulate")

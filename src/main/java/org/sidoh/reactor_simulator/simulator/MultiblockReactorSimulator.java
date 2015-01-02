@@ -159,7 +159,7 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
     fuelContainer.setCapacity(Integer.MAX_VALUE);
     fuelContainer.addFuel(fuel, Integer.MAX_VALUE, true); //fill to the brim, next call will clamp to actual size
     coolantContainer.setCapacity(Integer.MAX_VALUE);
-    coolantContainer.addCoolant(new FluidStack(FluidRegistry.WATER.getID(), Integer.MAX_VALUE));
+    coolantContainer.addCoolant(new FluidStack(0, Integer.MAX_VALUE));
     recalculateDerivedValues();
     ;
   }

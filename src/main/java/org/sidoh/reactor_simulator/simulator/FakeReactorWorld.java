@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.Lists;
 import erogenousbeef.bigreactors.common.multiblock.tileentity.TileEntityReactorControlRod;
+import erogenousbeef.bigreactors.common.multiblock.tileentity.TileEntityReactorPart;
 import erogenousbeef.core.common.CoordTriplet;
 import net.minecraft.tileentity.TileEntity;
 import org.sidoh.reactor_simulator.simulator.nested_map.ThreeNestedMap;
@@ -112,8 +113,18 @@ public class FakeReactorWorld implements IFakeReactorWorld {
 
   @Override
   public TileEntity getTileEntity(int x, int y, int z) {
-    Value value = worldValues.get(x, y, z);
-    return value == null ? null : value.getEntity();
+    final Value value = worldValues.get(x, y, z);
+
+    if (value == null) {
+      // Return a casing if coordinates are within bounds of world.
+      if (x == 0 || y == 0 || z == 0 || x == maxDims.x || y == maxDims.y || z == maxDims.z) {
+        return new TileEntityReactorPart();
+      } else {
+        return null;
+      }
+    }
+
+    return value.getEntity();
   }
 
   @Override

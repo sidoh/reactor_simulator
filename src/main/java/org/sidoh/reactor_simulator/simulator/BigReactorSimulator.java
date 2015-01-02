@@ -143,6 +143,8 @@ public class BigReactorSimulator {
         numNegativeDeltas++;
       }
 
+      System.out.println(energyValue);
+
       if (numNegativeDeltas >= STABILITY_THRESHOLD) {
         break;
       }
@@ -213,11 +215,11 @@ public class BigReactorSimulator {
 
   public static void main(String[] args) {
     BigReactorSimulator.init();
-    String reactor = "CCCCCCXCXCCCXCCCXCXCCCCCC";
+    String reactor = "EEEEXEEEE";
 
-    FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 7, 7, 3);
+    FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 5,5,4);
 
-    ReactorResult simulate = new BigReactorSimulator(true, 10000).simulate(fakeReactorWorld);
+    ReactorResult simulate = new BigReactorSimulator(false, 10000).simulate(fakeReactorWorld);
     System.out.println(simulate);
   }
 }

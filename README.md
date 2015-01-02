@@ -1,7 +1,7 @@
 Reactor Simulator
 =================
 
-Simulates designs for the popular MineCraft mod [BigReactors](http://github.com/erogenousbeef/BigReactors).
+Simulates designs for the popular MineCraft mod [BigReactors](http://github.com/erogenousbeef/BigReactors). Based on code by [pwestling](http://github.com/pwestling).
 
 ## Running
 

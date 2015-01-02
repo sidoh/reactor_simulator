@@ -156,8 +156,10 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
     for (TileEntity tileEntity : world.getParts()) {
       this.onBlockAdded((IMultiblockPart)tileEntity);
     }
+
     fuelContainer.setCapacity(Integer.MAX_VALUE);
     fuelContainer.addFuel(fuel, Integer.MAX_VALUE, true); //fill to the brim, next call will clamp to actual size
+
     recalculateDerivedValues();
   }
 
@@ -626,9 +628,6 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
     reactorHeatLossCoefficient = reactorHeatLossConductivity * surfaceArea;
 
     calculateReactorVolume();
-
-    coolantContainer.setCapacity(Integer.MAX_VALUE);
-
 //    if (attachedCoolantPorts.size() > 0) {
 //      int outerVolume = StaticUtils.ExtraMath.Volume(minCoord, maxCoord) - reactorVolume;
 //      coolantContainer.setCapacity(Math.max(0, Math.min(50000, outerVolume * 100)));

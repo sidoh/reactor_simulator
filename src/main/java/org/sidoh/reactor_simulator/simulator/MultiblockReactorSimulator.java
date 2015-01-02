@@ -158,10 +158,7 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
     }
     fuelContainer.setCapacity(Integer.MAX_VALUE);
     fuelContainer.addFuel(fuel, Integer.MAX_VALUE, true); //fill to the brim, next call will clamp to actual size
-    coolantContainer.setCapacity(Integer.MAX_VALUE);
-    coolantContainer.addCoolant(new FluidStack(0, Integer.MAX_VALUE));
     recalculateDerivedValues();
-    ;
   }
 
   public void beginUpdatingPlayer(EntityPlayer playerToUpdate) {
@@ -260,6 +257,8 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
     if (Float.isNaN(this.getReactorHeat())) {
       this.setReactorHeat(0.0f);
     }
+
+    System.out.println(getDebugInfo());
 
     float oldHeat = this.getReactorHeat();
     float oldEnergy = this.getEnergyStored();

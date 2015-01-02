@@ -102,7 +102,7 @@ public class FakeReactorWorld implements IFakeReactorWorld {
   public void makeCoolantColumn(int x, int z, String coolant) {
     if (x < maxDims.x && z < maxDims.z) {
       int maxY = maxDims.y;
-      for (int i = 1; i < maxY - 1; i++) { //From above reactor floor to below control rod
+      for (int i = 1; i < maxY; i++) { //From above reactor floor to below control rod
         worldValues.put(x, i, z, new Value(coolant));
       }
     } else {

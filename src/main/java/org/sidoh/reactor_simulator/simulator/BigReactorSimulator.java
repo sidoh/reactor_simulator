@@ -22,7 +22,7 @@ public class BigReactorSimulator {
           "E X X X X X X E" +
           "E E X E E X E E" +
           "E E E E E E E E";
-  private static final double STABILITY_THRESHOLD = 1500;
+  private static final double STABILITY_THRESHOLD = 150;
   private int ticks;
 
   public BigReactorSimulator(boolean activelyCooled, int ticks) {

@@ -106,7 +106,7 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
   private static final int ticksBetweenUpdates = 3;
   private static final int maxEnergyStored = 10000000;
 
-  public MultiblockReactorSimulator(IFakeReactorWorld world, String fuel, String coolant, boolean activelyCooled) {
+  public MultiblockReactorSimulator(IFakeReactorWorld world, String fuel, boolean activelyCooled) {
 
     // Game stuff
     active = false;

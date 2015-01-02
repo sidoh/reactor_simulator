@@ -7,8 +7,11 @@ import erogenousbeef.bigreactors.api.IHeatEntity;
 import erogenousbeef.bigreactors.api.registry.ReactorConversions;
 import erogenousbeef.bigreactors.api.registry.ReactorInterior;
 import erogenousbeef.bigreactors.api.registry.TurbineCoil;
+import erogenousbeef.bigreactors.common.BigReactors;
 import erogenousbeef.bigreactors.common.data.StandardReactants;
 import erogenousbeef.bigreactors.common.multiblock.helpers.RadiationHelper;
+import net.minecraft.item.EnumRarity;
+import net.minecraftforge.fluids.Fluid;
 
 public class BigReactorSimulator {
   private boolean activelyCooled;
@@ -104,6 +107,16 @@ public class BigReactorSimulator {
     TurbineCoil.registerBlock("blockTartarite", 3.5f, 1f, 2.5f);
     TurbineCoil.registerBlock("blockManyullyn", 3.5f, 1f, 2.5f);
 
+    Fluid fluidSteam = new Fluid("steam");
+    fluidSteam.setUnlocalizedName("steam");
+    fluidSteam.setTemperature(1000); // For consistency with TE
+    fluidSteam.setGaseous(true);
+    fluidSteam.setLuminosity(0);
+    fluidSteam.setRarity(EnumRarity.common);
+    fluidSteam.setDensity(6);
+
+    BigReactors.fluidSteam = fluidSteam;
+
     //    StandardReactants.yelloriumMapping = Reactants.registerSolid("ingotYellorium", StandardReactants.yellorium);
     //    StandardReactants.cyaniteMapping = Reactants.registerSolid("ingotCyanite", StandardReactants.cyanite);
     //
@@ -129,6 +142,8 @@ public class BigReactorSimulator {
       if (energyDelta < 0) {
         numNegativeDeltas++;
       }
+
+      System.out.println("Tick " + i + " value = " + energyValue);
 
       if (numNegativeDeltas >= STABILITY_THRESHOLD) {
         break;
@@ -204,7 +219,7 @@ public class BigReactorSimulator {
 
     FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 7, 7, 3);
 
-    ReactorResult simulate = new BigReactorSimulator(false, 10000).simulate(fakeReactorWorld);
+    ReactorResult simulate = new BigReactorSimulator(true, 10000).simulate(fakeReactorWorld);
     System.out.println(simulate);
   }
 }

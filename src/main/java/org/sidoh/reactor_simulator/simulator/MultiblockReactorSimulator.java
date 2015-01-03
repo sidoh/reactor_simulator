@@ -603,11 +603,6 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
       fuelToReactorHeatTransferCoefficient += fuelRod.getHeatTransferRate(worldObj);
     }
 
-    // Pick a random fuel rod Y as a starting point
-    int maxFuelRodY = maxCoord.y - 1;
-    int minFuelRodY = minCoord.y + 1;
-    currentFuelRod = attachedFuelRods.iterator();
-
     // Calculate heat transfer to coolant system based on reactor interior surface area.
     // This is pretty simple to start with - surface area of the rectangular prism defining the interior.
     int xSize = maxCoord.x - minCoord.x - 1;

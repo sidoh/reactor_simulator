@@ -121,6 +121,9 @@ public class RadiationHelperSimulator {
 
   private void performIrradiation(IFakeReactorWorld world, MultiblockReactorSimulator simulator, RadiationData data, RadiationPacket radiation, int x, int y, int z) {
     TileEntity te = world.getTileEntity(x, y, z);
+    if (x < 0 || y < 0 || z < 0 || x > world.getMaxCoord().x || y > world.getMaxCoord().y || z > world.getMaxCoord().z) {
+      return;
+    }
     if (te instanceof IRadiationModeratorSimulator) {
       ((IRadiationModeratorSimulator)te).moderateRadiation(data, radiation, world, simulator);
     } else if (world.isAirBlock(x, y, z)) {

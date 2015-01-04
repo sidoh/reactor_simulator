@@ -213,11 +213,11 @@ public class BigReactorSimulator {
 
   public static void main(String[] args) {
     BigReactorSimulator.init();
-    String reactor = "EEEEXEEEE";
+    String reactor = "EEEEEXXEEEEE";
 
-    FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 5,5,5);
+    FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 6,5,3);
 
-    ReactorResult simulate = new BigReactorSimulator(true, 10000).simulate(fakeReactorWorld);
+    ReactorResult simulate = new BigReactorSimulator(false, 10000).simulate(fakeReactorWorld);
     System.out.println(simulate);
   }
 }

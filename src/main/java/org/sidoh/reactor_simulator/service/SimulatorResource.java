@@ -29,7 +29,8 @@ public class SimulatorResource {
         definition.getLayout(),
         definition.getxSize(),
         definition.getzSize(),
-        definition.getHeight()
+        definition.getHeight(),
+        definition.getControlRodInsertion()
     );
     ReactorResult rawResult = simulator.simulate(fakeReactorWorld);
 
@@ -52,6 +53,9 @@ public class SimulatorResource {
     checkArgument(reactorDefinition.getxSize() <= 32, "xSize should be no larger than 32");
     checkArgument(reactorDefinition.getzSize() <= 32, "zSize should be no larger than 32");
     checkArgument(reactorDefinition.getHeight() <= 48, "height should be no larger than 48");
+
+    checkArgument(reactorDefinition.getControlRodInsertion() <= 100, "insertion should be in the range 0-100");
+    checkArgument(reactorDefinition.getControlRodInsertion() >= 0, "insertion should be in the range 0-100");
 
     final int layoutSize = (reactorDefinition.getxSize() - 2) * (reactorDefinition.getzSize() - 2);
     checkArgument(

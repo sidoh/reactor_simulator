@@ -62,7 +62,7 @@ public class FakeReactorWorld implements IFakeReactorWorld {
       setEntity(x, i, z, part);
       fuel.add(part);
     }
-    TileEntityReactorControlRod controlRod = new TileEntityReactorControlRod();
+    TileEntityReactorControlRod controlRod = new TileEntityReactorControlRodSimulator();
     controlRod.setControlRodInsertion(controlRodInsertion);
     setEntity(x, maxY, z, controlRod);
     numRods++;

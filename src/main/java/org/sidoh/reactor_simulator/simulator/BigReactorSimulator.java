@@ -215,7 +215,7 @@ public class BigReactorSimulator {
     BigReactorSimulator.init();
     String reactor = "EEEEEXXEEEEE";
 
-    FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 6,5,3, (short)0);
+    FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 6,5,3, (short)50);
 
     ReactorResult simulate = new BigReactorSimulator(false, 10000).simulate(fakeReactorWorld);
     System.out.println(simulate);

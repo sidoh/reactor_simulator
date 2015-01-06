@@ -13,13 +13,15 @@ public class ReactorDefinition implements Serializable, RestxPrincipal {
   private int height;
   private String layout;
   private boolean isActivelyCooled;
+  private short controlRodInsertion;
 
-  public ReactorDefinition(int xSize, int zSize, int height, String layout, boolean isActivelyCooled) {
+  public ReactorDefinition(int xSize, int zSize, int height, String layout, boolean isActivelyCooled, short controlRodInsertion) {
     this.xSize = xSize;
     this.zSize = zSize;
     this.height = height;
     this.layout = layout;
     this.isActivelyCooled = isActivelyCooled;
+    this.controlRodInsertion = controlRodInsertion;
   }
 
   public ReactorDefinition() {
@@ -32,6 +34,7 @@ public class ReactorDefinition implements Serializable, RestxPrincipal {
     height = reactorDefinition.height;
     layout = reactorDefinition.layout;
     isActivelyCooled = reactorDefinition.isActivelyCooled;
+    controlRodInsertion = reactorDefinition.controlRodInsertion;
   }
 
   public void setActivelyCooled(boolean isActivelyCooled) {
@@ -72,6 +75,14 @@ public class ReactorDefinition implements Serializable, RestxPrincipal {
 
   public boolean isActivelyCooled() {
     return isActivelyCooled;
+  }
+
+  public short getControlRodInsertion() {
+    return controlRodInsertion;
+  }
+
+  public void setControlRodInsertion(short controlRodInsertion) {
+    this.controlRodInsertion = controlRodInsertion;
   }
 
   @JsonIgnore

@@ -12,19 +12,22 @@ import org.sidoh.reactor_simulator.simulator.nested_map.ThreeNestedMap;
 
 public class FakeReactorWorld implements IFakeReactorWorld {
 
+
   public static class Factory {
     private final int xSize;
     private final int zSize;
     private final int height;
+    private short controlRodInsertion;
 
-    public Factory(int xSize, int ySize, int height) {
+    public Factory(int xSize, int ySize, int height, short controlRodInsertion) {
       this.xSize = xSize;
       this.zSize = ySize;
       this.height = height;
+      this.controlRodInsertion = controlRodInsertion;
     }
 
     public FakeReactorWorld create(String reactorLayout) {
-      return makeReactor(reactorLayout, xSize, zSize, height);
+      return makeReactor(reactorLayout, xSize, zSize, height, controlRodInsertion);
     }
   }
 
@@ -32,13 +35,15 @@ public class FakeReactorWorld implements IFakeReactorWorld {
   private final CoordTriplet maxDims;
   private final List<TileEntity> parts = Lists.newArrayList();
   private int numRods = 0;
+  private short controlRodInsertion;
 
-  public FakeReactorWorld(int x, int y, int z) {
+  public FakeReactorWorld(int x, int y, int z, short controlRodInsertion) {
+    this.controlRodInsertion = controlRodInsertion;
     this.maxDims = new CoordTriplet(x - 1, z - 1, y - 1);
   }
 
-  public static FakeReactorWorld makeReactor(String reactorLayout, int xSize, int zSize, int height) {
-    FakeReactorWorld fakeReactorWorld = new FakeReactorWorld(xSize, zSize, height);
+  public static FakeReactorWorld makeReactor(String reactorLayout, int xSize, int zSize, int height, short controlRodInsertion) {
+    FakeReactorWorld fakeReactorWorld = new FakeReactorWorld(xSize, zSize, height, controlRodInsertion);
     reactorLayout = reactorLayout.replaceAll(" ", "");
     reactorLayout = reactorLayout.replaceAll("\n", "");
     for (int i = 0; i < reactorLayout.length(); i++) {
@@ -58,6 +63,7 @@ public class FakeReactorWorld implements IFakeReactorWorld {
       fuel.add(part);
     }
     TileEntityReactorControlRod controlRod = new TileEntityReactorControlRod();
+    controlRod.setControlRodInsertion(controlRodInsertion);
     setEntity(x, maxY, z, controlRod);
     numRods++;
   }

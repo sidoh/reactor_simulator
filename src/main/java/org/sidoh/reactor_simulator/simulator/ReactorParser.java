@@ -8,7 +8,7 @@ public class ReactorParser {
   public static final char CONTROL_ROD = 'X';
   private FakeReactorWorld world;
 
-  public ReactorParser(int height, double insertion, String[] lines) {
+  public ReactorParser(int height, short insertion, String[] lines) {
     String first = lines[0].replaceAll(" ", "");
     this.world = new FakeReactorWorld(lines.length + 1, height, first.length() + 1, insertion);
     for (int i = 0; i < lines.length; i++) {

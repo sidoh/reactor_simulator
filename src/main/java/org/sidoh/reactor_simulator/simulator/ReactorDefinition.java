@@ -13,9 +13,9 @@ public class ReactorDefinition implements Serializable, RestxPrincipal {
   private int height;
   private String layout;
   private boolean isActivelyCooled;
-  private short controlRodInsertion;
+  private Short controlRodInsertion;
 
-  public ReactorDefinition(int xSize, int zSize, int height, String layout, boolean isActivelyCooled, short controlRodInsertion) {
+  public ReactorDefinition(int xSize, int zSize, int height, String layout, boolean isActivelyCooled, Short controlRodInsertion) {
     this.xSize = xSize;
     this.zSize = zSize;
     this.height = height;
@@ -34,7 +34,7 @@ public class ReactorDefinition implements Serializable, RestxPrincipal {
     height = reactorDefinition.height;
     layout = reactorDefinition.layout;
     isActivelyCooled = reactorDefinition.isActivelyCooled;
-    controlRodInsertion = reactorDefinition.controlRodInsertion;
+    controlRodInsertion = reactorDefinition.controlRodInsertion == null ? 0 : reactorDefinition.controlRodInsertion;
   }
 
   public void setActivelyCooled(boolean isActivelyCooled) {
@@ -77,7 +77,7 @@ public class ReactorDefinition implements Serializable, RestxPrincipal {
     return isActivelyCooled;
   }
 
-  public short getControlRodInsertion() {
+  public Short getControlRodInsertion() {
     return controlRodInsertion;
   }
 

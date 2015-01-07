@@ -24,7 +24,7 @@ public abstract class TimeSeriesSimulationMonitor implements SimulationMonitor {
     }
 
     public static <T extends TimeSeriesSimulationMonitor> Factory<T> factoryOf(Class<T> klass) {
-      return new Factory<>(klass);
+      return new Factory<T>(klass);
     }
   }
 

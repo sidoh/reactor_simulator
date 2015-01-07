@@ -792,7 +792,7 @@ public class MultiblockReactorSimulator implements IEnergyHandler, IReactorFuelI
     return IHeatEntity.ambientHeat;
   }
 
-  protected float getCoolantTemperature() {
+  public float getCoolantTemperature() {
     if (isPassivelyCooled()) {
       return getPassiveCoolantTemperature();
     } else {

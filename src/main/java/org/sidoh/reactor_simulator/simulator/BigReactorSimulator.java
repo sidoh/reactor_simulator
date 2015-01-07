@@ -1,8 +1,8 @@
 package org.sidoh.reactor_simulator.simulator;
 
-import java.util.Deque;
+import java.util.Arrays;
+import java.util.List;
 
-import com.google.common.collect.Lists;
 import erogenousbeef.bigreactors.api.IHeatEntity;
 import erogenousbeef.bigreactors.api.registry.ReactorConversions;
 import erogenousbeef.bigreactors.api.registry.ReactorInterior;
@@ -12,6 +12,15 @@ import erogenousbeef.bigreactors.common.data.StandardReactants;
 import erogenousbeef.bigreactors.common.multiblock.helpers.RadiationHelper;
 import net.minecraft.item.EnumRarity;
 import net.minecraftforge.fluids.Fluid;
+import org.sidoh.reactor_simulator.simulator.monitors.CoolantTemperatureMonitor;
+import org.sidoh.reactor_simulator.simulator.monitors.FuelConsumptionMonitor;
+import org.sidoh.reactor_simulator.simulator.monitors.FuelFertilityMonitor;
+import org.sidoh.reactor_simulator.simulator.monitors.FuelHeatMonitor;
+import org.sidoh.reactor_simulator.simulator.monitors.MonitorUtils;
+import org.sidoh.reactor_simulator.simulator.monitors.OutputMonitor;
+import org.sidoh.reactor_simulator.simulator.monitors.ReactorHeatMonitor;
+
+import static org.sidoh.reactor_simulator.simulator.monitors.TimeSeriesSimulationMonitor.Factory.factoryOf;
 
 public class BigReactorSimulator {
   private boolean activelyCooled;
@@ -25,7 +34,18 @@ public class BigReactorSimulator {
           "E X X X X X X E" +
           "E E X E E X E E" +
           "E E E E E E E E";
-  private static final double STABILITY_THRESHOLD = 150;
+  // Number of negative deltas that should be seen before a simulation is considered stable.
+  private static final double STABILITY_THRESHOLD = 200;
+
+  private static final List<SimulationMonitor.Factory> MONITORS = Arrays.<SimulationMonitor.Factory>asList(
+      factoryOf(CoolantTemperatureMonitor.class),
+      factoryOf(FuelConsumptionMonitor.class),
+      factoryOf(FuelFertilityMonitor.class),
+      factoryOf(FuelHeatMonitor.class),
+      factoryOf(OutputMonitor.class),
+      factoryOf(ReactorHeatMonitor.class)
+  );
+
   private int ticks;
 
   public BigReactorSimulator(boolean activelyCooled, int ticks) {
@@ -129,6 +149,7 @@ public class BigReactorSimulator {
 
   public ReactorResult simulate(IFakeReactorWorld world) {
     final MultiblockReactorSimulator simulator = new MultiblockReactorSimulator(world, "yellorium", activelyCooled);
+    final List<SimulationMonitor> monitors = MonitorUtils.instantiate(MONITORS);
 
     double lastValue = 0;
     int numNegativeDeltas = 0;
@@ -147,77 +168,29 @@ public class BigReactorSimulator {
         break;
       }
 
+      for (SimulationMonitor monitor : monitors) {
+        monitor.offer(simulator);
+      }
+
       lastValue = energyValue;
     }
 
-    return new ReactorResult(
-        simulator.getFuelConsumedLastTick(),
-        simulator.getEnergyGeneratedLastTick(),
-        simulator.getFuelFertility(),
-        simulator.getCoolantTemperature(),
-        simulator.getFuelHeat(),
-        simulator.getReactorHeat()
-    );
-  }
-
-  public static class TimeSeriesMonitor {
-    private final int windowSize;
-    private final Deque<Double> window;
-
-    private double mean;
-    private double m2;
-
-    public TimeSeriesMonitor(int windowSize) {
-      this.windowSize = windowSize;
-      this.mean = 0;
-      this.m2 = 0;
-      this.window = Lists.newLinkedList();
+    final ReactorResult result = new ReactorResult();
+    for (SimulationMonitor monitor : monitors) {
+      monitor.report(result);
     }
-
-    public void offer(final double value) {
-      window.addLast(value);
-
-      if (window.size() > windowSize) {
-        final double evictedValue = window.removeFirst();
-        final double evictedDelta = evictedValue - mean;
-
-        mean = mean - (evictedDelta / window.size());
-        m2 = m2 - (evictedDelta*(value - mean));
-      }
-
-      final double delta = value - mean;
-      mean = mean + (delta / window.size());
-      m2 = m2 + delta*(value - mean);
-    }
-
-    public double getLastStandardDeviation() {
-      return Math.sqrt(getLastVariance());
-    }
-
-    public double getLastVariance() {
-      return m2/(window.size() - 1);
-    }
-
-    public double getLastMean() {
-      return mean;
-    }
-
-    public int getWindowSize() {
-      return window.size();
-    }
-
-    public int getMaxWindowSize() {
-      return windowSize;
-    }
+    return result;
   }
 
   public static void main(String[] args) {
     BigReactorSimulator.init();
-    String reactor = "EEEEEXXEEEEE";
+    String reactor = "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOXXXOOOOOOOOGGXCXGGOOOOOOGGXXXGGOOOOOXXXCXCXXXOOOOXCXXXXXCXOOOOXXXCXCXXXOOOOOGGXXXGGOOOOOOGGXCXGGOOOOOOOOXXXOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
 
-    FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 6,5,3, (short)50);
+    for (int i = 0; i < 100; i++) {
+      FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 15,15,7, (short)1);
 
-    ReactorResult simulate = new BigReactorSimulator(false, 10000).simulate(fakeReactorWorld);
-    System.out.println(simulate);
+      ReactorResult simulate = new BigReactorSimulator(false, 10000).simulate(fakeReactorWorld);
+      System.out.println(simulate);
+    }
   }
 }

@@ -47,6 +47,7 @@ public class ReactorParser {
     mappings.put('O', "fluid:air");
     mappings.put('E', "fluid:ender");
     mappings.put('C', "fluid:cryotheum");
+    mappings.put('R', "fluid:redstone");
     mappings.put('D', "block:blockDiamond");
     mappings.put('P', "fluid:pyrotheum");
     mappings.put('G', "block:blockGraphite");

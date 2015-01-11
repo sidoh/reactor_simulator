@@ -3,11 +3,12 @@
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) 
 SCREEN_NAME="reactor_simulator"
 
-restart_command="cd $DIR/.. && ./gradlew clean run"
+restart_command='./gradlew clean run\n'
 
-if [ $(screen -ls | grep $SCREEN_NAME | wc -l) -eq 0 ]; then
-  screen -S $SCREEN_NAME -d -m $restart_command
-else 
+if [ $(screen -ls | grep $SCREEN_NAME | wc -l) -gt 0 ]; then
   screen -x $SCREEN_NAME -p 0 -X stuff ''
-  screen -S $SCREEN_NAME -p 0 -X $restart_command
+else 
+  screen -S $SCREEN_NAME -d -m /bin/bash
 fi
+
+screen -S $SCREEN_NAME -X stuff "$restart_command"

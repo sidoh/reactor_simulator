@@ -52,5 +52,6 @@ public class ReactorParser {
     mappings.put('P', "fluid:pyrotheum");
     mappings.put('G', "block:blockGraphite");
     mappings.put('M', "block:blockManyullyn");
+    mappings.put('L', "block:blockGold");
   }
 }

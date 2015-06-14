@@ -2,8 +2,10 @@ package org.sidoh.reactor_simulator.service;
 
 import org.sidoh.reactor_simulator.simulator.BigReactorSimulator;
 import org.sidoh.reactor_simulator.simulator.FakeReactorWorld;
+import org.sidoh.reactor_simulator.simulator.LinearControlRodOptimizer;
 import org.sidoh.reactor_simulator.simulator.ReactorDefinition;
 import org.sidoh.reactor_simulator.simulator.ReactorResult;
+import org.sidoh.reactor_simulator.simulator.ResultMetrics;
 import restx.annotations.GET;
 import restx.annotations.RestxResource;
 import restx.factory.Component;
@@ -43,6 +45,22 @@ public class SimulatorResource {
         .setOutput(rawResult.output)
         .setReactorDefinition(definition)
         .setReactorHeat(rawResult.reactorHeat);
+  }
+
+  @PermitAll
+  @GET("/optimize_insertion")
+  public short optimizeInsertion(ReactorDefinition definition) {
+    validateReactorDefinition(definition);
+
+    BigReactorSimulator simulator = new BigReactorSimulator(
+        definition.isActivelyCooled(),
+        MAX_NUMBER_OF_TICKS
+    );
+
+    return new LinearControlRodOptimizer(
+        ResultMetrics.efficiency(),
+        simulator
+    ).optimizeInsertion(definition);
   }
 
   private static void validateReactorDefinition(ReactorDefinition reactorDefinition) {

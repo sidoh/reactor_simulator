@@ -185,12 +185,11 @@ public class BigReactorSimulator {
   public static void main(String[] args) {
     BigReactorSimulator.init();
     String reactor = "OOOOOOOOOORROOOOOOOOOOOOOOOOOOOXXXOOOOOOOOGGXCXGGOOOOOOGGXXXGGOOOOOXXXCXCXXXOOOOXCXXXXXCXOOOOXXXCXCXXXOOOOOGGXXXGGOOOOOOGGXCXGGOOOOOOOOXXXOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO";
+    final ReactorDefinition definition = new ReactorDefinition(15, 15, 7, reactor, false, (short)0);
 
-    for (int i = 0; i < 100; i++) {
-      FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(reactor, 15,15,7, (short)1);
-
-      ReactorResult simulate = new BigReactorSimulator(false, 10000).simulate(fakeReactorWorld);
-      System.out.println(simulate);
-    }
+    System.out.println(new LinearControlRodOptimizer(
+        ResultMetrics.efficiency(),
+        new BigReactorSimulator(false, 10000)
+    ).optimizeInsertion(definition));
   }
 }

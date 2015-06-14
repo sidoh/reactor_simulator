@@ -11,28 +11,22 @@ public class LinearControlRodOptimizer implements ControlRodOptimizer {
 
   @Override
   public short optimizeInsertion(ReactorDefinition reactorDefinition) {
-    double max = 0;
-    short bestInsertion = 0;
+    double max = Helpers.measure(bigReactorSimulator, resultMetric, reactorDefinition, (short)99);
+    short bestInsertion = 99;
 
-    for (short insertion = 0; insertion <= 100; insertion++) {
-      final double value = measure(reactorDefinition, insertion);
+    for (short insertion = 98; insertion >= 0; insertion--) {
+      final double value = Helpers.measure(
+          bigReactorSimulator, resultMetric, reactorDefinition, insertion
+      );
+
       if (value > max) {
         max = value;
         bestInsertion = insertion;
+      } else {
+        break;
       }
     }
 
     return bestInsertion;
-  }
-
-  private double measure(ReactorDefinition reactorDefinition, short insertion) {
-    final FakeReactorWorld fakeReactorWorld = FakeReactorWorld.makeReactor(
-        reactorDefinition.getLayout(),
-        reactorDefinition.getxSize(),
-        reactorDefinition.getzSize(),
-        reactorDefinition.getHeight(),
-        insertion
-    );
-    return resultMetric.measure(bigReactorSimulator.simulate(fakeReactorWorld));
   }
 }

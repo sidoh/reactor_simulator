@@ -51,7 +51,7 @@ repositories {
 
 dependencies {
     compile 'com.mod-buildcraft:buildcraft:6.0.18:dev'
-    compile 'li.cil.oc:OpenComputers:MC1.7.10-1.4.0.+:api'
+    compile 'li.cil.oc:OpenComputers:MC1.7.10-1.4.+:api'
     compile name: 'CoFHCore', version: '[1.7.10]3.0.0RC7-211-dev', ext: 'jar'
 
     // :'(

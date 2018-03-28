@@ -45,14 +45,13 @@ repositories {
     }
     ivy {
         name "CoFHCore"
-        artifactPattern "http://addons.cursecdn.com/files/2221/835/[module]-[revision].[ext]"
+        artifactPattern "http://addons-origin.cursecdn.com/files/2388/751/[module]-[revision].[ext]"
     }
 }
 
 dependencies {
     compile 'com.mod-buildcraft:buildcraft:6.0.18:dev'
-    compile 'li.cil.oc:OpenComputers:MC1.7.10-1.4.0.+:api'
-    compile name: 'CoFHCore', version: '[1.7.10]3.0.0B9-40-dev', ext: 'jar'
+//    compile 'li.cil.oc:OpenComputers:MC1.7.10-1.4.0.+:api'
 
     // :'(
     compile fileTree(dir: 'lib', include: ['*.jar'])
